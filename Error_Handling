@@ -1,0 +1,40 @@
+import { useForm } from "react-hook-form"
+function App()
+{
+  const { register,handleSubmit,formState:{errors} }=useForm()
+  const myfun=(data)=>
+  {
+    console.log(data)
+    document.getElementById("res1").innerHTML="username:"+data.Name
+    document.getElementById("res2").innerHTML="password:"+data.Password
+    document.getElementById("res3").innerHTML="Email:"+data.Email
+  }
+  return(
+    <div className="container">
+    <form onSubmit={handleSubmit(myfun)}>
+      
+      <h1>welcome to React-hook-form(useform)</h1>
+<input type="text"name="Name"{...register("Name",{required:true,minLength:8})}>
+</input> <br></br>
+      {errors.Name && errors.Name.type==="required" && <font color="red">Must be fill name</font>}
+      {errors.Name && errors.Name.type==="minLength" && <font color="red">Username should include numbers</font>}
+
+      <div>
+<input type="password"name="Password"{...register("Password",
+{required:true,minLength:8})}></input><br></br>
+      {errors.Name && errors.Name.type==="required" && <font color="red">Enter password</font>}
+      {errors.Name && errors.Name.type==="minlength" && <font color="red">include All characters</font>}
+      </div>
+      
+      <div>
+      <input type="email" name="Email"{...register("Email")}></input>
+      </div>
+      <input type="submit"></input>
+      <div id="res1"></div>
+      <div id="res2"></div>
+      <div id="res3"></div>
+    </form>
+    </div>
+  )
+}
+export default App
